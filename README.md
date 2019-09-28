@@ -1,6 +1,6 @@
 # isucon-tools
 
-scripts for ISUCON !
+This is my ISUCON toolbox!
 
 - go
   - goのサンプルとか
