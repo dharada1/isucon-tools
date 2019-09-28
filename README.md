@@ -20,9 +20,10 @@ scripts for ISUCON !
     - h2o
 
 - templates/configutations
-  - パフォーマンスチューニング系 (メモ程度)
+  - パフォーマンスチューニング系の秘伝のタレメモ
     - nginx
     - mysql
+    - kernel系
 
 - slack.sh
   - pipeでslack投稿するシンプルなスクリプト (TODO)
