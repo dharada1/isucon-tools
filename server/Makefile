@@ -1,9 +1,8 @@
+# inspired by https://github.com/tohutohu/isucon9/blob/master/Makefile
+
 # log path
 NGINX_ACCESS_LOG_PATH:=/tmp/nginx/access.log
 MYSQL_SLOW_QUERY_LOG_PATH:=/tmp/mysql/slow-query.log
-
-SLACKCAT:=slackcat --tee --channel general
-SLACKRAW:=slackcat --channel general
 
 # ログのsuffixにつける用
 $(eval EXEC_DATE := $(shell date +%Y%m%d%I%M%S))
