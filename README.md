@@ -9,16 +9,17 @@ scripts for ISUCON !
     - インメモリキャッシュ
     - net/http, sql.DBのチューニング
 
-- local/Makefile
-  - ローカル用の便利スクリプト
-    - goのbuild,deployなど
-
-- server/Makefile
-  - サーバ用の便利スクリプト
-    - inspired by https://github.com/tohutohu/isucon9/blob/master/Makefile
-    - log rotate
-    - alp
-    - slow queryのon/off
+- scripts
+  - local/Makefile
+    - ローカル用の便利スクリプト
+      - goのbuild,deployなど
+  - server/Makefile
+    - サーバ用の便利スクリプト
+      - inspired by https://github.com/tohutohu/isucon9/blob/master/Makefile
+      - log rotate
+      - journalctl
+      - alp
+      - slow queryのon/off
 
 - templates/alp
   - alp用のltsvテンプレート
