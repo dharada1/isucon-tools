@@ -33,6 +33,9 @@ func nethttpパッケージのパラメータチューニング() {
 	// 	Transport: http.Transport{MaxIdleConnsPerHost: 32},
 	// }
 	// _, _ = c.Get("http://example.com")
+
+	// 参考
+	// https://gist.github.com/catatsuy/e627aaf118fbe001f2e7c665fda48146#httpclient%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6
 }
 
 func レスポンスを受け取ったら必ずBodyをCloseする() {

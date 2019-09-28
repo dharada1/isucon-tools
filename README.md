@@ -2,6 +2,13 @@
 
 scripts for ISUCON !
 
+- go
+  - goのサンプルとか
+    - daemon化
+    - goroutineでの並列化
+    - インメモリキャッシュ
+    - net/http, sql.DBのチューニング
+
 - local/Makefile
   - ローカル用の便利スクリプト
     - goのbuild,deployなど
