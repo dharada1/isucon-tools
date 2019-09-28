@@ -4,6 +4,8 @@ SOURCE_PATH := "./"
 BINARY_LINUX_PATH := "./bin/linux"
 BINARY_DARWIN_PATH := "./bin/darwin"
 
+build: build-linux build-darwin ## build for all
+
 build-linux: ## build for linux
 	GO111MODULE=on \
 	GOOS=linux \
