@@ -13,6 +13,7 @@ func main() {
 	レスポンスを受け取ったら必ずBodyをCloseする()
 }
 
+// WIP ...
 func nethttpパッケージのパラメータチューニング() {
 	// http.Clientはパッケージ側にグローバル変数として存在する(スレッドセーフ).
 	// const DefaultMaxIdleConnsPerHost = 2 がデフォルトなので、適切に変更してやる.
