@@ -9,13 +9,18 @@ $(eval EXEC_DATE := $(shell date +%Y%m%d%I%M%S))
 
 all: help
 
-hsg:
-	history | grep
-
-xxx: ## do something
+# TODO ===============================================
 
 install-alp: ## install alp
 	# TODO
+
+go-pprof: ## go-pprof
+	# TODO
+
+mysql-myprofiler: ## myprofiler
+	# TODO
+
+# TODO ===============================================
 
 alp-exec: ## analyze nginx access log with alp
 	# その場でaggregatesは書いてみてください
