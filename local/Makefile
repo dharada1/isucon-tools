@@ -6,12 +6,14 @@ BINARY_DARWIN_PATH := "./bin/darwin"
 
 build-linux: ## build for linux
 	GO111MODULE=on \
-	GOOS=linux GOARCH=amd64 \
+	GOOS=linux \
+	GOARCH=amd64 \
 	go build -o $(BINARY_LINUX_PATH) $(SOURCE_PATH)
 
 build-darwin: ## build for mac
 	GO111MODULE=on \
-	GOOS=darwin GOARCH=amd64 \
+	GOOS=darwin \
+	GOARCH=amd64 \
 	go build -o $(BINARY_DARWIN_PATH) $(SOURCE_PATH)
 
 deploy: ## deploy (scp) to the server
