@@ -45,7 +45,7 @@ mysql-slow-query-log-disable: ## disable mysql slow query log
 	sudo mysql -e "set global slow_query_log = OFF;"
 
 tail-log: ## check logs.
-	sudo journalctl
+	sudo journalctl -f
 
 help: ## command lists
 	@echo "=========================="
