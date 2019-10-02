@@ -13,16 +13,16 @@ type resHoge struct {
 }
 
 func getHogeHandler(w http.ResponseWriter, r *http.Request) {
-	// defer tracer.Close() // ???
 	defer tracer.Flush() // Handlerの処理が終わるタイミングでtracer.Flush()によってトレース情報を送信させる. (1req 1送信)
 
-	// span := tracer.Trace(r.Context()).NewRootSpanFromRequest(r)
+	// Traceを作成
 	trace := tracer.Trace(r.Context())
-	span := trace.NewRootSpanFromRequest(r)
-	defer func() {
-		span.SetResponse(200).Finish()
-	}()
 
+	// Spanの作成
+	span := trace.NewRootSpanFromRequest(r)
+	defer span.SetResponse(200).Finish()
+
+	// SpanのContextを渡してfunc 子を呼ぶ
 	for i := 0; i < 5; i++ {
 		time.Sleep(100 * time.Millisecond)
 		子(span.Context())
@@ -41,7 +41,8 @@ func 子(ctx context.Context) {
 
 	for i := 0; i < 5; i++ {
 		time.Sleep(100 * time.Millisecond)
-		孫(ctx)
+		// 孫(span.Context()) // Spanからchildを作りたいがうまく認識されない
+		孫(ctx) // これだとRootのSpanからそのまま派生してしまう
 	}
 }
 

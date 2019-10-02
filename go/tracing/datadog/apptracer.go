@@ -28,7 +28,7 @@ func InitAppTracer() {
 		context.Background(),
 		// datadog.Options{Service: "xxxxxxxxxxx"} がwrapされてる
 		// https://app.datadoghq.com/apm/services のサービス名になる
-		"datch-apptracer-test-ddexporter-9",
+		"datch-apptracer-test-ddexporter-10",
 	)
 	if err != nil {
 		panic(err)
