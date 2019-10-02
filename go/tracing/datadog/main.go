@@ -9,10 +9,10 @@ import (
 )
 
 func main() {
-	InitTracer()
+	InitAppTracer()
 
 	mux := goji.NewMux()
-
 	mux.HandleFunc(pat.Get("/hoge"), getHogeHandler)
+
 	log.Fatal(http.ListenAndServe(":8000", mux))
 }

@@ -9,26 +9,37 @@ import (
 )
 
 // global singleton tracer.
+// AppTracer has multiple tracing platform clients to send tracing activity to the platforms.
+// AppTracer -> opencensus client -> datadog Exporter
 var tracer *apptracer.AppTracer
 
-// Init initializes trace setting.
-func InitTracer() {
-	// init tracer
+func InitAppTracer() {
+	// Init tracer
 	tracer = apptracer.New(apptracer.Config{
-		Enable:      true,
-		ServiceName: "datch-apptracer-test",
-		Version:     "v0.0.1",
-		Environment: "stage",
+		Enable: true,
+		// OpenCensusのみ使う場合はapptracer.Configは使われない?
+		// ServiceName: "datch-apptracer-test-tracer", // https://app.datadoghq.com/apm/services のサービス名になる。
+		// Version:     "v0.0.1",
+		// Environment: "stage",
 	})
-	// datadog (installed agent is needed)
-	ddExp, err := datadog.NewExporter(context.Background(), "datch-apptracer-test")
+
+	// Init ddExporter of OpenCensus
+	ddExp, err := datadog.NewExporter(
+		context.Background(),
+		// datadog.Options{Service: "xxxxxxxxxxx"} がwrapされてる
+		// https://app.datadoghq.com/apm/services のサービス名になる
+		"datch-apptracer-test-ddexporter-9",
+	)
 	if err != nil {
 		panic(err)
 	}
 
-	ocCli := opencensus.NewClient(ddExp)
-	opencensus.SetSamplingRate(1) // 100%
+	// OpenCensus client ( with Datadog exporter ) を AppTracer にもたせる.
+	ocCli := opencensus.NewClient(ddExp) // (ocCli := opencensus.NewClient(ddExp, sdExp, xrayExp) みたく複数持てる)
+	opencensus.SetSamplingRate(1)        // 100 % (テストなので)
 	tracer.AddClient(ocCli)
 
+	// datadog exporterに限ってはFlush() is dummy method (コード側でFlushの処理はやらずにDatadog Agentが溜めて送る感じなので)
+	// だがXRayやStackDriver使う場合は必ず必要.
 	tracer.Flush()
 }
