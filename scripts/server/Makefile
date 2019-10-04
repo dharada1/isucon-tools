@@ -3,6 +3,7 @@
 # log path
 NGINX_ACCESS_LOG_PATH:=/tmp/nginx/access.log
 MYSQL_SLOW_QUERY_LOG_PATH:=/tmp/mysql/slow-query.log
+PPROF_FILE_PATH:=/path/to/cpu.pprof
 
 # ログのsuffixにつける用
 $(eval EXEC_DATE := $(shell date +%Y%m%d%I%M%S))
@@ -33,7 +34,6 @@ nginx-access-log-rotate: ## lotate nginx log.
 	sudo systemctl restart nginx
 
 mysql-slow-query-log-rotate: ## lotate mysql slow query log.
-	echo $(EXEC_DATE)
 	mv $(MYSQL_SLOW_QUERY_LOG_PATH) $(MYSQL_SLOW_QUERY_LOG_PATH)_$(EXEC_DATE)
 	touch $(MYSQL_SLOW_QUERY_LOG_PATH)
 	sudo systemctl restart mysql
@@ -43,6 +43,9 @@ mysql-slow-query-log-enable: ## enable mysql slow query log with long_query_time
 
 mysql-slow-query-log-disable: ## disable mysql slow query log
 	sudo mysql -e "set global slow_query_log = OFF;"
+
+go-pprof-rotate: ## lotate cpu.pprof
+	mv $(PPROF_FILE_PATH) $(PPROF_FILE_PATH)_$(EXEC_DATE)
 
 tail-log: ## check logs.
 	sudo journalctl -f

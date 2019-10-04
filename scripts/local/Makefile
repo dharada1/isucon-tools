@@ -18,8 +18,31 @@ build-darwin: ## build for mac
 	GOARCH=amd64 \
 	go build -o $(BINARY_DARWIN_PATH) $(SOURCE_PATH)
 
-deploy: ## deploy (scp) to the server
-	echo "do something"
+deploy-%: ## deploy. deploy-isucon-1, deploy-isucon-2, deploy-isucon-3. 前提として ~/.ssh/config にisucon-1とかでno pass sshできるように記載が必要
+	# deploy
+	scp ./bin/linux $*:/home/isucon/go/bin/
+
+	# stop
+	ssh $* "systemctl stop app.golang"
+
+	# rotate logs
+	ssh $* "systemctl restart app.golang"
+	ssh $* "make nginx-access-log-rotate"
+	ssh $* "make mysql-slow-query-log-rotate"
+	# ssh $* "make go-pprof-rotate"
+
+	# start
+	ssh $* systemctl start app.golang
+
+pprof: ## pprof intaractive mode. enter command. ( e.g. list fib )
+	go tool pprof $(BINARY_DARWIN_PATH) cpu.pprof
+
+pprof-gui: ## pprof-gui
+	go tool pprof -http=":9999" $(BINARY_DARWIN_PATH) cpu.pprof
+
+pprof-png: ## pprof-png
+	go tool pprof -png $(BINARY_DARWIN_PATH) cpu.pprof > out.png
+
 
 help: ## command lists
 	@echo "=========================="
