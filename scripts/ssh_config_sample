@@ -1,0 +1,17 @@
+Host isucon-1
+    Hostname xx.xxx.xxx.xxx
+    IdentityFile    ~/.ssh/isucon-20191005.pem
+    User            root
+    Port            22
+
+Host isucon-2
+    Hostname 13.230.239.190
+    IdentityFile    ~/.ssh/isucon-20191005.pem
+    User            root
+    Port            22
+
+Host isucon-3
+    Hostname 13.230.239.190
+    IdentityFile    ~/.ssh/isucon-20191005.pem
+    User            root
+    Port            22
