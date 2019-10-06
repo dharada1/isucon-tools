@@ -100,3 +100,10 @@ todo server/Makefile の移植
 ```
 
 Makefileもこれに応じて応じて書く.
+
+## go mod
+
+go.mod にこう書かないとbuildは通らない...
+(/webapp/下をgit管理するので,パッケージは/goと一段掘られる)
+`module github.com/dharada1/isucon-tools/go`
+
